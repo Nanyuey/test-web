@@ -12,7 +12,7 @@ module.exports = {
   productionSourceMap: false,
   publicPath: './',
   devServer: {
-    disableHostCheck: true,
+    disableHostCheck: true
     // proxy: {
     //   '/local': {
     //     target: 'http://d.cn',
@@ -42,7 +42,7 @@ module.exports = {
         plugins: [
           new PrerenderSPAPlugin({
             staticDir: resolve('dist'),
-            routes: ['/','/about'], // 你需要预渲染的路由
+            routes: ['/', '/about'], // 你需要预渲染的路由
             renderer: new Renderer({
               inject: {
                 _m: 'prerender'
@@ -71,7 +71,7 @@ module.exports = {
     // 修复HMR
     config.resolve.symlinks(true)
   },
-   css: {
+  css: {
     extract: false,
     sourceMap: false,
     loaderOptions: {

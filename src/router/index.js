@@ -9,15 +9,15 @@ import { init as DingtalkInit, login as DingtalkLogin } from '@/tools/dingtalk/d
 // 创建静态页面相关路由
 import staticHtml from './static-html/index'
 
-const Login =()=>import('pc/user/login.vue')
+const Login = () => import('pc/user/login.vue')
 
 Vue.use(VueRouter)
-const routes=[
-...staticHtml,
+const routes = [
+  ...staticHtml,
   {
-    path:'/login',
-    name:'login',
-    component: Login,
+    path: '/login',
+    name: 'login',
+    component: Login
   }
 ]
 async function toLogin (next) {
@@ -67,7 +67,8 @@ async function updateUser () {
 const router = new VueRouter({
   linkActiveClass: 'active',
   mode: 'history',
-  base: process.env.BASE_URL,
+  base: '/test-web/',
+  // base: process.env.BASE_URL,
   routes
 })
 
