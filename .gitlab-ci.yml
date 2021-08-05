@@ -1,0 +1,66 @@
+image: node:10.15.3
+
+stages:
+  - install_packages
+  - build_test
+  - build_production
+  - deploy_test
+  - deploy_production
+
+cache:
+  paths:
+    - dist/
+
+# 打包测试
+build_test:
+  stage: build_test
+  only:
+    - develop
+    - pre-release
+    - feature-ci
+  artifacts:
+      paths:
+      - dist
+  tags:
+    - shared
+  script:
+    - npm install
+    - npm run build:test
+
+# 打包正式
+build_production:
+  stage: build_production
+  only:
+    - master
+  artifacts:
+      paths:
+        - dist
+  tags:
+    - shared
+  script:
+    - npm install
+    - npm run build:release
+
+# 部署测试服务器
+deploy_test:
+  stage: deploy_test
+  only:
+    - develop
+    - pre-release
+    - feature-ci
+  tags:
+    - shared
+  script:
+    - node ./build/deploy.js test
+
+
+# 部署生产服务器
+deploy_production:
+  stage: deploy_production
+  only:
+    - master
+  tags:
+    - shared
+  script:
+    - node ./build/deploy.js release
+  when: manual

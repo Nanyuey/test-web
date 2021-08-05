@@ -3,22 +3,74 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "build:ding": "vue-cli-service build --mode production.ding",
+    "build:n": "vue-cli-service build --mode production",
+    "build:test": "vue-cli-service build --mode crm",
+    "build:test-ding": "vue-cli-service build --mode crm.ding",
+    "build:theme": "node_modules/.bin/et -c src/assets/scss/el-variables.scss -o src/assets/scss/element/theme",
+    "commit": "cz",
+    "dev": "vue-cli-service serve --mode development",
+    "dev-ding": "vue-cli-service serve --mode development.ding",
+    "ding": "npm run build:ding && npm run upload ding",
+    "n": "npm run build:n && npm run upload n",
+    "publish": "bash build/publish.sh",
+    "publish:ding": "npm run publish ding",
+    "publish:n": "npm run publish n",
+    "publish:test": "npm run publish test",
+    "publish:test-ding": "npm run publish test-ding",
+    "test": "npm run build:test && npm run upload test",
+    "test-ding": "npm run build:test-ding && npm run upload test-ding",
+    "upload": "bash build/upload.sh"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
-    "vue": "^2.6.11"
+    "crypto-js": "^4.1.1",
+    "dingtalk-jsapi": "^2.13.50",
+    "element-ui": "^2.15.5",
+    "js-cookie": "^3.0.0",
+    "node-sass": "^6.0.1",
+    "sass-loader": "^12.1.0",
+    "spark-md5": "^3.0.1",
+    "uuid": "^8.3.2",
+    "vue": "^2.6.11",
+    "vue-axios": "^3.2.5",
+    "vue-axios-plugin": "^1.3.0",
+    "vue-router": "^3.5.2",
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "babel-eslint": "^10.1.0",
+    "babel-plugin-component": "^1.1.1",
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
+    "lint-staged": "^11.1.1",
+    "prerender-spa-plugin": "^3.4.0",
     "vue-template-compiler": "^2.6.11"
+  },
+  // "gitHooks": {
+  //   "pre-commit": "lint-staged"
+  // },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  // "lint-staged": {
+  //   "*.{js,jsx,vue}": [
+  //     "vue-cli-service lint",
+  //     "git add"
+  //   ]
+  // },
+  "engines": {
+    "node": "15.14.0"
   },
   "eslintConfig": {
     "root": true,
